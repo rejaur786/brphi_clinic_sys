@@ -13,7 +13,7 @@ export default class NavigationBar extends Component {
             </Link>
             <Nav className="mr-auto">
                           <Link to={"consultation"} className="nav-link">Consultation</Link>
-                          <Link to={"patientList"} className="nav-link">Patients</Link>
+                          <Link to={"patientList"} className="nav-link">Live Clinic List</Link>
                     </Nav>
         </Navbar>
 
