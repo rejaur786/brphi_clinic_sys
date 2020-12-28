@@ -16,7 +16,7 @@ export default class Dashboard extends Component{
                                       </p>
 
                                        <p>
-                                       <Link to={"patientList"} className="nav-link" class="text-success">Patient List</Link>
+                                       <Link to={"patientList"} className="nav-link" class="text-success">Live Clinic List</Link>
                                       </p>
 
             </Jumbotron>
