@@ -42,7 +42,7 @@ export default class PatientList extends Component {
     render(){
         return(
             <Card className={"border border-dark bg-dark text-white"}>
-                <Card.Header><FontAwesomeIcon icon={faList} /> Patient List</Card.Header>
+                <Card.Header><FontAwesomeIcon icon={faList} /> Clinic List</Card.Header>
                 <Card.Body>
                     <Table bordered hover striped variant="dark">
                         <thead>
