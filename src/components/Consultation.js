@@ -12,22 +12,27 @@ export default class Consultation extends Component {
         super(props);
         this.state = this.initialState;
         this.consultationChange = this.consultationChange.bind(this);
-        this.submitBook = this.submitBook.bind(this);
+        this.submitConsultancy = this.submitConsultancy.bind(this);
     }
 
     initialState = {
-        problem:'', history:'', pastMedicalHistory:'', familyHistory:'', examination:'', medication:'', allergy:'', diagnoses:'', investigation:'', treatment:''
+        problem:'', history:'', pastMedicalHistory:'', familyHistory:'', examination:'', medication:'', allergy:'', diagnoses:'', investigation:'', plan:'', prescription:''
     }
 
     resetBook = () => {
         this.setState(() => this.initialState);
     }
 
-    submitBook = event => {
+    submitConsultancy = event => {
         //alert('Title: ' + this.state.title+ ', Author: ' + this.state.author + ', Cover Photo URL : ' + this.state.coverPhotoURL + ', ISBN Number : ' + this.state.isbnNumber + ', Price : ' + this.state.price + ', Language : ' + this.state.language);
         event.preventDefault();
 
+        var emridValue = "emrid_3";
+        var consultationidValue = "consultation_10";
+
         const consultation = {
+            consultationid: consultationidValue,
+            emrid: emridValue,
             problem: this.state.problem,
             history: this.state.history,
             pastMedicalHistory : this.state.pastMedicalHistory,
@@ -35,27 +40,25 @@ export default class Consultation extends Component {
             examination : this.state.examination,
             medication : this.state.medication,
             allergy : this.state.allergy,
-            diagnoses : this.state.diagnoses,
+            differentialDiagnoses : this.state.diagnoses,
             investigation : this.state.investigation,
-            treatment : this.state.treatment
-
+            plan : this.state.plan,
+            prescription: this.state.prescription,
         };
 
         alert('problem: ' + this.state.problem+ ', history: ' + this.state.history + ', pastMedicalHistory : ' +
         this.state.pastMedicalHistory + ', familyHistory : ' + this.state.familyHistory + ', examination : ' + this.state.examination + ', medication : ' +
         this.state.medication + ', allergy : ' + this.state.allergy + ', diagnoses : ' + this.state.diagnoses +
-        ', investigation : ' + this.state.investigation + ', treatment  : ' + this.state.treatment);
+        ', investigation : ' + this.state.investigation + ', plan  : ' + this.state.plan + ', prescription : ' + this.state.prescription);
 
-        this.setState(this.initialState);
 
-       /* axios.post("http://localhost:8081/rest/books", book)
+        axios.post("https://ji224k9a68.execute-api.ap-south-1.amazonaws.com/dev/gramgp/consultation", consultation)
             .then(response => {
                 if(response.data != null){
                     this.setState(this.initialState);
-                    alert("Book Saved Successfully");
+                    alert("Consultation Saved Successfully");
                 }
-
-            });*/
+            });
     }
 
     consultationChange = event => {
@@ -66,13 +69,13 @@ export default class Consultation extends Component {
 
     render(){
 
-        const{problem, history, pastMedicalHistory, familyHistory, examination, medication, allergy, diagnoses, investigation, treatment} = this.state;
+        const{problem, history, pastMedicalHistory, familyHistory, examination, medication, allergy, diagnoses, investigation, plan, prescription} = this.state;
 
             return(
                  <Card className={"border border-dark bg-dark text-white"}>
                                 <Card.Header><FontAwesomeIcon icon={faPlusSquare} /> Add Consultation</Card.Header>
                                 <Card.Body>
-                                    <Form onReset={this.resetBook} onSubmit={this.submitBook} id="consultationFormId">
+                                    <Form onReset={this.resetBook} onSubmit={this.submitConsultancy} id="consultationFormId">
                                         <Form.Row>
                                           <Form.Group as={Col} controlId="formGridProblem">
                                             <Form.Label>Problem</Form.Label>
@@ -128,10 +131,6 @@ export default class Consultation extends Component {
                                                            as="textarea" rows="2" />
                                                        </Form.Group>
                                          </Form.Row>
-
-
-
-
                                          <Form.Row>
                                             <Form.Group as={Col} controlId="formGridExamination">
                                                 <Form.Label>Examination</Form.Label>
@@ -200,18 +199,31 @@ export default class Consultation extends Component {
                                                 </Form.Group>
                                             </Form.Row>
                                             <Form.Row>
-                                                <Form.Group as={Col} controlId="formGridTreatment">
-                                                    <Form.Label>Treatment</Form.Label>
+                                                <Form.Group as={Col} controlId="formGridPlan">
+                                                    <Form.Label>Plan</Form.Label>
                                                         <Form.Control required autoComplete="off"
                                                          type="test"
-                                                         name="treatment"
-                                                         value={treatment}
+                                                         name="plan"
+                                                         value={plan}
                                                          onChange={this.consultationChange}
                                                          className={"bg-dark text-white"}
-                                                         placeholder="Enter Treatment Details"
+                                                         placeholder="Enter Plan Details"
                                                          as="textarea" rows="3" />
                                                 </Form.Group>
                                             </Form.Row>
+                                             <Form.Row>
+                                                <Form.Group as={Col} controlId="formGridPrescription">
+                                                    <Form.Label>Prescription</Form.Label>
+                                                        <Form.Control required autoComplete="off"
+                                                         type="test"
+                                                         name="prescription"
+                                                         value={prescription}
+                                                         onChange={this.consultationChange}
+                                                         className={"bg-dark text-white"}
+                                                         placeholder="Enter Prescription Details"
+                                                         as="textarea" rows="3" />
+                                                </Form.Group>
+                                             </Form.Row>
 
                                         <Card.Footer style={{"textAlign":"right"}}>
                                             <Button size="sm "variant="success" type="submit">
