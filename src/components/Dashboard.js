@@ -8,7 +8,7 @@ export default class Dashboard extends Component{
     render(){
         return(
             <Jumbotron className="bg-dark text-white">
-                                      <h1>Dashboard 2</h1>
+                                      <h1>Dashboard</h1>
 
                                       <p/>
                                       <p>
