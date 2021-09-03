@@ -86,7 +86,6 @@ function App() {
                    <Button size="sm" variant="outline-primary" >
                       <Link to={{
                          pathname: "/patientDashboard"
-
                       }}><FontAwesomeIcon icon={faBackward} /> Back
                       </Link>
                    </Button>

@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 
 import {Card, Form, Button, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSave, faPlusSquare, faUndo} from '@fortawesome/free-solid-svg-icons';
+import {faSave, faPlusSquare, faUndo, faBackward} from '@fortawesome/free-solid-svg-icons';
+import {Link} from 'react-router-dom';
+
+
 
 import axios from 'axios';
 
@@ -231,7 +234,13 @@ export default class Consultation extends Component {
                                             </Button>{'  '}
                                             <Button size="sm "variant="info" type="reset">
                                                 <FontAwesomeIcon icon={faUndo} /> Reset
-                                            </Button>
+                                            </Button>{'  '}
+                                             <Button size="sm" variant="outline-primary" >
+                                                <Link to={{
+                                                  pathname: "/patientDashboard"
+                                                  }}><FontAwesomeIcon icon={faBackward} /> Back
+                                                </Link>
+                                             </Button>
                                         </Card.Footer>
                                     </Form>
                                 </Card.Body>
