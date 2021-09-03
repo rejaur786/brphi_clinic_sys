@@ -4,7 +4,7 @@ import MaterialTable from 'material-table'
 import {Jumbotron, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faList, faEdit, faTrash, faBackward} from '@fortawesome/free-solid-svg-icons';
+import {faBackward, faPlusSquare} from '@fortawesome/free-solid-svg-icons';
 
 
 function App() {
@@ -70,6 +70,13 @@ function App() {
         }}
       />
     </div>
+    <p/>
+                       <Button size="sm" className={"border border-dark bg-dark text-white"} >
+                                             <Link to={{
+                                                pathname: "/WorkInProgress"
+                                             }}><FontAwesomeIcon icon={faPlusSquare} /> Add Demographics
+                                             </Link>
+                                          </Button>
 
     <div className="App">
                    <h1 align="center"></h1>
@@ -82,14 +89,25 @@ function App() {
                      exportButton:true
                      }}
                    />
-                   <p/>
-                   <Button size="sm" variant="outline-primary" >
-                      <Link to={{
-                         pathname: "/patientDashboard"
-                      }}><FontAwesomeIcon icon={faBackward} /> Back
-                      </Link>
-                   </Button>
+
                  </div>
+                   <p/>
+                       <Button size="sm" className={"border border-dark bg-dark text-white"} >
+                                             <Link to={{
+                                                pathname: "/WorkInProgress"
+                                             }}><FontAwesomeIcon icon={faPlusSquare} /> Add Investigation
+                                             </Link>
+                                          </Button>{'  '}
+
+                       <p/>
+                       <p/>
+                       <Button size="sm" variant="outline-primary" >
+                                                 <Link to={{
+                                                    pathname: "/patientDashboard"
+                                                 }}><FontAwesomeIcon icon={faBackward} /> Back
+                                                 </Link>
+                                              </Button>
+
     </Jumbotron>
   );
 }
