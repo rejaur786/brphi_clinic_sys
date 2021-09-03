@@ -8,6 +8,9 @@ import Dashboard from './components/Dashboard';
 import Footer from './components/Footer';
 import Consultation from './components/Consultation';
 import PatientList from './components/PatientList';
+import PatientDashboard from './components/PatientDashboard';
+import WorkInProgress from './components/WorkInProgress';
+import ClinicResultDemographics from './components/ClinicResultDemographics';
 
 function App() {
   const marginTop = {
@@ -24,6 +27,9 @@ function App() {
                             <Route path="/" exact component={Dashboard}/>
                             <Route path="/consultation" exact component={Consultation}/>
                             <Route path="/patientList" exact component={PatientList}/>
+                            <Route path="/patientDashboard" exact component={PatientDashboard}/>
+                            <Route path="/workInProgress" exact component={WorkInProgress}/>
+                            <Route path="/clinicResultDemographics" exact component={ClinicResultDemographics}/>
                         </Switch>
                     </Col>
                 </Row>

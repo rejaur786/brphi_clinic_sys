@@ -9,7 +9,7 @@ export default class NavigationBar extends Component {
 
         <Navbar bg="dark" variant="dark">
             <Link to={""} className="navbar-brand">
-                <img src="https://www.brphi.org/wp-content/uploads/2018/09/cropped-logo-02.png" width="50" height="50" alt="brand"/> MedTech
+                <img src="https://usercontent.one/wp/www.brphi.org/wp-content/uploads/2018/09/brphi-logo-96px-b.png" width="100" height="100" alt="brand" />
             </Link>
             <Nav className="mr-auto">
                           <Link to={"consultation"} className="nav-link">Consultation</Link>

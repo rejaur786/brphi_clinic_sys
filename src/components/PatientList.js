@@ -4,6 +4,7 @@ import {Card, Table, Image, ButtonGroup, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faList, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default class PatientList extends Component {
 
@@ -23,7 +24,7 @@ export default class PatientList extends Component {
          axios.get("https://ji224k9a68.execute-api.ap-south-1.amazonaws.com/dev/gramgp/patient/emrid_1")
          .then(response => response.data)
          .then((data) => {
-            this.setState({patients: data.lastLowLevelResult.queryResult.items});
+            this.setState({patients: data});
          });
 
 
@@ -35,9 +36,6 @@ export default class PatientList extends Component {
         this.setState({patients: data});*/
 
     }
-
-
-
 
     render(){
         return(
@@ -64,20 +62,23 @@ export default class PatientList extends Component {
                                    </tr> :
 
                                this.state.patients.map((patient) => (
-                                   <tr key={patient.PK.s}>
+                                   <tr key={patient.PK}>
                                       <td>
-                                          {patient.lastAppointmentDateTime.s}
+                                          {patient.lastAppointmentDateTime}
                                       </td>
-                                      <td>{patient.firstname.s} {patient.lastname.s}</td>
-                                      <td>{patient.PK.s}</td>
-                                      <td>{patient.gender.s}</td>
-                                      <td>{patient.dob.s}</td>
-                                      <td>{patient.reason.s}</td>
+                                      <td>{patient.firstname} {patient.lastname}</td>
+                                      <td>{patient.PK}</td>
+                                      <td>{patient.gender}</td>
+                                      <td>{patient.dob}</td>
+                                      <td>{patient.reason}</td>
                                       <td>
-                                          <ButtonGroup>
-                                             <Button size="sm" variant="outline-primary"><FontAwesomeIcon icon={faEdit} /></Button>{''}
-                                             <Button size="sm" variant="outline-danger"><FontAwesomeIcon icon={faTrash} /></Button>
-                                          </ButtonGroup>
+                                            <Button size="sm" variant="outline-primary" >
+                                               <Link to={{
+                                                  pathname: "/patientDashboard",
+                                                  state: this.state.patient
+                                                  }}><FontAwesomeIcon icon={faEdit} />
+                                               </Link>
+                                            </Button>
                                       </td>
                                    </tr>
                                  ))
