@@ -73,7 +73,7 @@ function App() {
     <p/>
                        <Button size="sm" className={"border border-dark bg-dark text-white"} >
                                              <Link to={{
-                                                pathname: "/WorkInProgress"
+                                                pathname: "/Demographic"
                                              }}><FontAwesomeIcon icon={faPlusSquare} /> Add Demographics
                                              </Link>
                                           </Button>
