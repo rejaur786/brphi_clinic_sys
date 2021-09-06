@@ -7,195 +7,165 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-export default class Demographic extends Component {
+export default class Investigation extends Component {
 
     constructor(props){
         super(props);
         this.state = this.initialState;
-        this.demographicChange = this.demographicChange.bind(this);
-        this.submitDemographic = this.submitDemographic.bind(this);
+        this.investigationChange = this.investigationChange.bind(this);
+        this.submitInvestigation = this.submitInvestigation.bind(this);
     }
 
     initialState = {
-        carbonMonoxide:'', perf:'', o2Sat:'', pulse:'', weight:'', bp:'', rpg:'', demographicDate:'', urine:'', bmi:''
+        dateOfInvestigation:'', renalProfile:'', liverFunction:'', hba1c:'', lipidProfile:'', egfr:'', fbc:'', urine:'', otherInvestigations:''
     }
 
-    resetDemographic = () => {
+    resetInvestigation = () => {
         this.setState(() => this.initialState);
     }
 
-    submitDemographic = event => {
+
+    submitInvestigation = event => {
         //alert('Title: ' + this.state.title+ ', Author: ' + this.state.author + ', Cover Photo URL : ' + this.state.coverPhotoURL + ', ISBN Number : ' + this.state.isbnNumber + ', Price : ' + this.state.price + ', Language : ' + this.state.language);
         event.preventDefault();
 
         var emridValue = "emrid_1";
-        var demographicidValue = "demographics_" + uuidv4();
+        var investigationidValue = "investigation_" + uuidv4();
 
-        const demographic = {
-            demographicid: demographicidValue,
+        const investigation = {
+            investigationid: investigationidValue,
             emrid: emridValue,
-            carbonMonoxide: this.state.carbonMonoxide,
-            perf: this.state.perf,
-            o2Sat : this.state.o2Sat,
-            pulse: this.state.pulse,
-            weight : this.state.weight,
-            bp : this.state.bp,
-            rbg : this.state.rbg,
-            demographicDate : this.state.demographicDate,
+            dateOfInvestigation: this.state.dateOfInvestigation,
+            renalProfile: this.state.renalProfile,
+            liverFunction : this.state.liverFunction,
+            hba1c: this.state.hba1c,
+            lipidProfile : this.state.lipidProfile,
+            egfr : this.state.egfr,
+            fbc : this.state.fbc,
             urine : this.state.urine,
-            bmi : this.state.bmi
+            otherInvestigations : this.state.otherInvestigations
         };
 
-        alert('carbonMonoxide: ' + this.state.carbonMonoxide + ', perf: ' + this.state.perf + ', o2Sat : ' +
-        this.state.o2Sat + ', pulse : ' + this.state.pulse + ', weight : ' + this.state.weight + ', bp : ' +
-        this.state.bp + ', rbg : ' + this.state.rbg + ', demographicDate : ' + this.state.demographicDate +
-        ', urine : ' + this.state.urine + ', bmi  : ' + this.state.bmi);
+        alert('dateOfInvestigation: ' + this.state.dateOfInvestigation + ', renalProfile: ' + this.state.renalProfile + ', liverFunction : ' +
+        this.state.liverFunction + ', hba1c : ' + this.state.hba1c + ', lipidProfile : ' + this.state.lipidProfile + ', egfr : ' +
+        this.state.egfr + ', fbc : ' + this.state.fbc + ', urine : ' + this.state.urine + ', otherInvestigations  : ' + this.state.otherInvestigations);
 
 
-        axios.post("https://ji224k9a68.execute-api.ap-south-1.amazonaws.com/dev/gramgp/demographics", demographic)
+        axios.post("https://ji224k9a68.execute-api.ap-south-1.amazonaws.com/dev/gramgp/investigations", investigation)
             .then(response => {
                 if(response.data != null){
                     this.setState(this.initialState);
-                    alert("Demographic Saved Successfully");
+                    alert("Investigation Saved Successfully");
                 }
             });
     }
 
-    demographicChange = event => {
+    investigationChange = event => {
         this.setState({
             [event.target.name]:event.target.value
         });
     }
 
+
+
     render(){
 
-        const{carbonMonoxide, perf, o2Sat, pulse, weight, bp, rbg, demographicDate, urine, bmi} = this.state;
+        const{dateOfInvestigation, renalProfile, liverFunction, hba1c, lipidProfile, egfr, fbc, urine, otherInvestigations} = this.state;
 
             return(
                  <Card className={"border border-dark bg-dark text-white"}>
-                                <Card.Header><FontAwesomeIcon icon={faPlusSquare} /> Add Demographic</Card.Header>
+                                <Card.Header><FontAwesomeIcon icon={faPlusSquare} /> Add Investigation</Card.Header>
                                 <Card.Body>
-                                    <Form onReset={this.resetDemographic} onSubmit={this.submitDemographic} id="demographicFormId">
+                                    <Form onReset={this.resetInvestigation} onSubmit={this.submitInvestigation} id="investigationFormId">
                                         <Form.Row>
-                                            <Form.Group as={Col} controlId="formGridBp">
-                                                 <Form.Label>Date</Form.Label>
+                                            <Form.Group as={Col} controlId="formGridDateOfInvestigation">
+                                                 <Form.Label>Date Of Investigation</Form.Label>
                                                  <Form.Control required autoComplete="off"
                                                    type="test"
-                                                   name="demographicDate"
-                                                   value={demographicDate}
-                                                   onChange={this.demographicChange}
+                                                   name="dateOfInvestigation"
+                                                   value={dateOfInvestigation}
+                                                   onChange={this.investigationChange}
                                                    className={"bg-dark text-white"}
                                                    placeholder="Enter Date"
                                                    as="textarea" rows="1" />
                                             </Form.Group>
                                         </Form.Row>
                                         <Form.Row>
-                                          <Form.Group as={Col} controlId="formGridBp">
-                                            <Form.Label>BP</Form.Label>
+                                          <Form.Group as={Col} controlId="formGridRenalProfile">
+                                            <Form.Label>Renal Profile</Form.Label>
                                             <Form.Control required autoComplete="off"
                                                 type="test"
-                                                name="bp"
-                                                value={bp}
-                                                onChange={this.demographicChange}
+                                                name="renalProfile"
+                                                value={renalProfile}
+                                                onChange={this.investigationChange}
                                                 className={"bg-dark text-white"}
-                                                placeholder="Enter BP"
+                                                placeholder="Enter Renal Profile"
                                                 as="textarea" rows="1" />
                                           </Form.Group>
                                         </Form.Row>
                                         <Form.Row>
-                                          <Form.Group as={Col} controlId="formGridPulse">
-                                               <Form.Label>Pulse</Form.Label>
+                                          <Form.Group as={Col} controlId="formGridLiverFunction">
+                                               <Form.Label>Liver Function</Form.Label>
                                                    <Form.Control required autoComplete="off"
                                                      type="test"
-                                                     name="pulse"
-                                                     value={pulse}
-                                                     onChange={this.demographicChange}
+                                                     name="liverFunction"
+                                                     value={liverFunction}
+                                                     onChange={this.investigationChange}
                                                      className={"bg-dark text-white"}
-                                                     placeholder="Enter Pulse"
+                                                     placeholder="Enter Liver Function"
                                                      as="textarea" rows="1"  />
                                           </Form.Group>
                                         </Form.Row>
-
-
-
                                         <Form.Row>
-                                                    <Form.Group as={Col} controlId="formGridWeight">
-                                                       <Form.Label>Weight</Form.Label>
+                                                    <Form.Group as={Col} controlId="formGridHba1c">
+                                                       <Form.Label>Hba1c</Form.Label>
                                                        <Form.Control required autoComplete="off"
                                                           type="test"
-                                                          name="weight"
-                                                          value={weight}
-                                                          onChange={this.demographicChange}
+                                                          name="hba1c"
+                                                          value={hba1c}
+                                                          onChange={this.investigationChange}
                                                           className={"bg-dark text-white"}
-                                                          placeholder="Enter Weight"
+                                                          placeholder="Enter Hba1c"
                                                           as="textarea" rows="1" />
                                                     </Form.Group>
                                         </Form.Row>
                                         <Form.Row>
-                                                    <Form.Group as={Col} controlId="formGridBmi">
-                                                       <Form.Label>BMI</Form.Label>
+                                                    <Form.Group as={Col} controlId="formGridLipidProfile">
+                                                       <Form.Label>Lipid Profile</Form.Label>
                                                        <Form.Control required autoComplete="off"
                                                           type="test"
-                                                          name="bmi"
-                                                          value={bmi}
-                                                          onChange={this.demographicChange}
+                                                          name="lipidProfile"
+                                                          value={lipidProfile}
+                                                          onChange={this.investigationChange}
                                                           className={"bg-dark text-white"}
-                                                          placeholder="Enter BMI"
+                                                          placeholder="Enter Lipid Profile"
                                                            as="textarea" rows="1" />
                                                        </Form.Group>
                                          </Form.Row>
-                                         <Form.Row>
-                                            <Form.Group as={Col} controlId="formGridRbg">
-                                                <Form.Label>RBG</Form.Label>
-                                                    <Form.Control required autoComplete="off"
-                                                     type="test"
-                                                     name="rbg"
-                                                     value={rbg}
-                                                     onChange={this.demographicChange}
-                                                     className={"bg-dark text-white"}
-                                                     placeholder="Enter RBG"
-                                                     as="textarea" rows="1" />
-                                            </Form.Group>
-                                        </Form.Row>
                                         <Form.Row>
-                                            <Form.Group as={Col} controlId="formGridO2Sat">
-                                                <Form.Label>O2 Sat</Form.Label>
+                                            <Form.Group as={Col} controlId="formGridEgfr">
+                                                <Form.Label>eGFR</Form.Label>
                                                     <Form.Control required autoComplete="off"
                                                     type="test"
-                                                    name="o2Sat"
-                                                    value={o2Sat}
-                                                    onChange={this.demographicChange}
+                                                    name="egfr"
+                                                    value={egfr}
+                                                    onChange={this.investigationChange}
                                                     className={"bg-dark text-white"}
-                                                    placeholder="Enter O2 Sat"
+                                                    placeholder="Enter eGFR"
                                                     as="textarea" rows="1" />
                                                 </Form.Group>
                                             </Form.Row>
-
                                             <Form.Row>
-                                                <Form.Group as={Col} controlId="formGridPerf">
-                                                    <Form.Label>Perf</Form.Label>
+                                                <Form.Group as={Col} controlId="formGridFbc">
+                                                    <Form.Label>FBC</Form.Label>
                                                         <Form.Control required autoComplete="off"
                                                          type="test"
-                                                         name="perf"
-                                                         value={perf}
-                                                         onChange={this.demographicChange}
+                                                         name="fbc"
+                                                         value={fbc}
+                                                         onChange={this.investigationChange}
                                                          className={"bg-dark text-white"}
-                                                         placeholder="Enter PERF"
+                                                         placeholder="Enter FBC"
                                                          as="textarea" rows="1"  />
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formGridCarbonMonoxide">
-                                                    <Form.Label>Carbon Monoxide</Form.Label>
-                                                        <Form.Control required autoComplete="off"
-                                                         type="test"
-                                                         name="carbonMonoxide"
-                                                         value={carbonMonoxide}
-                                                         onChange={this.demographicChange}
-                                                         className={"bg-dark text-white"}
-                                                         placeholder="Enter Carbon Monoxide"
-                                                         as="textarea" rows="1"
-                                                         />
                                                 </Form.Group>
                                             </Form.Row>
                                             <Form.Row>
@@ -205,9 +175,23 @@ export default class Demographic extends Component {
                                                          type="test"
                                                          name="urine"
                                                          value={urine}
-                                                         onChange={this.demographicChange}
+                                                         onChange={this.investigationChange}
                                                          className={"bg-dark text-white"}
                                                          placeholder="Enter Urine"
+                                                         as="textarea" rows="1"
+                                                         />
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formGridOtherInvestigations">
+                                                    <Form.Label>Other Investigations</Form.Label>
+                                                        <Form.Control required autoComplete="off"
+                                                         type="test"
+                                                         name="otherInvestigations"
+                                                         value={otherInvestigations}
+                                                         onChange={this.investigationChange}
+                                                         className={"bg-dark text-white"}
+                                                         placeholder="Enter Other Investigations"
                                                          as="textarea" rows="1" />
                                                 </Form.Group>
                                             </Form.Row>

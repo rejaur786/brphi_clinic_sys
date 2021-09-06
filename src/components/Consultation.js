@@ -4,6 +4,7 @@ import {Card, Form, Button, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave, faPlusSquare, faUndo, faBackward} from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -31,7 +32,7 @@ export default class Consultation extends Component {
         event.preventDefault();
 
         var emridValue = "emrid_3";
-        var consultationidValue = "consultation_10";
+        var consultationidValue = "consultation_" + uuidv4();
 
         const consultation = {
             consultationid: consultationidValue,
